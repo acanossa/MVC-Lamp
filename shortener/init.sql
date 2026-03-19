@@ -1,0 +1,17 @@
+-- SQL de inicialización (MySQL compatible)
+CREATE TABLE IF NOT EXISTS urls (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  code VARCHAR(12) UNIQUE NOT NULL,
+  target_url TEXT NOT NULL,
+  created_at DATETIME NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS accesses (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  url_id INT NOT NULL,
+  ip VARCHAR(45) NOT NULL,
+  country VARCHAR(64),
+  user_agent TEXT,
+  created_at DATETIME NOT NULL,
+  FOREIGN KEY (url_id) REFERENCES urls(id) ON DELETE CASCADE
+);
